@@ -1,25 +1,28 @@
 <?php
-require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/../config/db.php';
 
 use App\Middleware\AuthMiddleware;
+use App\Middleware\RoleMiddleware;
 use Slim\Factory\AppFactory;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Models\User;
+use Slim\Views\Twig;
+use Slim\Views\TwigMiddleware;
+
+require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../config/db.php';
 
 $app = AppFactory::create();
+// Untuk di sisi Produksi cache ini nanti dipindahken ke folder tertentu (baca dokumentasi lagi sebelum di deploy di server)
+$twig = Twig::create(__DIR__ . '/../src/templates', ['cache' => false]); 
 
 $app->addBodyParsingMiddleware();
-
-// $app->get('/', function($request, $response) {
-//     $response->getBody()->write("Hello Slim!");
-//     return $response;
-// });
+$app->add(TwigMiddleware::create($app, $twig));
 
 $app->get('/', function(Request $request, Response $response){
-    $response->getBody()->write(file_get_contents(__DIR__ . '/../src/templates/login.php'));
-    return $response;
+    $view = Twig::fromRequest($request);
+
+    return $view->render($response, 'login.php.twig');
 });
 
 $app->post('/login', function(Request $request, Response $response, $args) {
@@ -31,16 +34,16 @@ $app->post('/login', function(Request $request, Response $response, $args) {
     // Model User ada di src/Models/User.php; (App\Models\User)
     $user = User::where('username', $username)->first();
 
+    $view = Twig::fromRequest($request);
+
     if($user && password_verify($password, $user->password)) {
         $_SESSION['user_id'] = $user->user_id;
         $_SESSION['role_id'] = $user->role_id;
 
-        $response->getBody()->write(json_encode(['message' => 'Login berhasil']));
-        return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
+        return $view->render($response, 'admin.php.twig');
     }
     else{
-        $response->getBody()->write(json_encode(['error' => "Login gagal"]));
-        return $response->withStatus(401)->withHeader('Content-Type', 'application/json');
+        return $view->render($response, 'err/401.html.twig');
     }
 });
 
@@ -57,5 +60,10 @@ $app->post('/logout', function(Request $request, Response $response, $args){
     $response->getBody()->write(json_encode(['message' => 'Logout berhasil']));
     return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
 });
+
+// Dashboard Role
+$app->get('/dashboard/admin', function(Request $request, Response $response, $args){
+
+})->add(new RoleMiddleware(1));
 
 $app->run();
