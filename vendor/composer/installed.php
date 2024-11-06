@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => '__root__',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '57d449b70b96d5da63de587360dcdb7e5c36514c',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         '__root__' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '57d449b70b96d5da63de587360dcdb7e5c36514c',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -268,6 +268,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'slim/twig-view' => array(
+            'pretty_version' => '3.4.1',
+            'version' => '3.4.1.0',
+            'reference' => 'b4268d87d0e327feba5f88d32031e9123655b909',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../slim/twig-view',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'spatie/once' => array(
             'dev_requirement' => false,
             'replaced' => array(
@@ -280,6 +289,24 @@
             'reference' => '97bebc53548684c17ed696bc8af016880f0f098d',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/clock',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'symfony/deprecation-contracts' => array(
+            'pretty_version' => 'v3.5.0',
+            'version' => '3.5.0.0',
+            'reference' => '0e0d29ce1f20deffb4ab1b016a7257c4f1e789a1',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/deprecation-contracts',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'symfony/polyfill-ctype' => array(
+            'pretty_version' => 'v1.31.0',
+            'version' => '1.31.0.0',
+            'reference' => 'a3cc8b044a6ea513310cbd48ef7333b384945638',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/polyfill-ctype',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
@@ -298,6 +325,15 @@
             'reference' => '60328e362d4c2c802a54fcbf04f9d3fb892b4cf8',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/polyfill-php80',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'symfony/polyfill-php81' => array(
+            'pretty_version' => 'v1.31.0',
+            'version' => '1.31.0.0',
+            'reference' => '4a4cfc2d253c21a5ad0e53071df248ed48c6ce5c',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/polyfill-php81',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
@@ -333,6 +369,15 @@
             'provided' => array(
                 0 => '2.3|3.0',
             ),
+        ),
+        'twig/twig' => array(
+            'pretty_version' => 'v3.14.0',
+            'version' => '3.14.0.0',
+            'reference' => '126b2c97818dbff0cdf3fbfc881aedb3d40aae72',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../twig/twig',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'voku/portable-ascii' => array(
             'pretty_version' => '2.0.1',
